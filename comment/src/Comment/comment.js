@@ -14,24 +14,24 @@ class Comment extends Component {
         }
     }
 
-    getCommentData = (commentValue, nickname) => {
+    getCommentData = (commentValue, nickname, checked) => {
         let date = new Date()
         let commentData = this.state.commentData
-        commentData.push({commentValue, nickname, date})
+        commentData.push({commentValue, nickname, date, checked})
 
         this.setState({
-
+            commentData : commentData
         })
 
     }
 
     render() {
-
+        console.log(this.state.commentData)
         return (
             <>
                 <div className="">
                     <div className="">
-
+                        <List listData={this.state.commentData}/>
                         <Input inputData={this.getCommentData} />
                     </div>
                 </div>

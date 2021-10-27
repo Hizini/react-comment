@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import './list.scss';
 
 class List extends Component {
-    render() {
 
+
+    render() {
         return (
             <>
-                <div className="">
+                <div className="display">
                     <div className="">
-                       
                     </div>
                 </div>
             </>

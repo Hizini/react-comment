@@ -4,25 +4,41 @@ import './comment.scss';
 
 import Input from './Input/input';
 import List from './List/list';
-
+import i18n from "./i18n/i18n";
 class Comment extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            commentData: []
+            commentData: [],
+            isToggle: false,
+            value: 'kd'
         }
     }
 
     getCommentData = (commentValue, nickname, checked) => {
         let date = new Date()
         let commentData = this.state.commentData
-        commentData.push({commentValue, nickname, date, checked})
+        commentData.push({ commentValue, nickname, date, checked })
 
         this.setState({
-            commentData : commentData
+            commentData: commentData
         })
 
+    }
+
+    onClickButtonHandler = () => {
+        this.setState({
+            isToggle: !this.state.isToggle
+        })
+        console.log(this.state.isToggle)
+    }
+
+    changeLanguage = (e) => {
+        this.setState({
+            value : e.target.value
+        })
+        i18n.changeLanguage(e.target.value)
     }
 
     render() {
@@ -30,9 +46,16 @@ class Comment extends Component {
         return (
             <>
                 <div className="">
+                    <button onClick={this.onClickButtonHandler}>{this.state.isToggle ? `${i18n.t('commentDisable')}`: `${i18n.t('commmentActivation')}`}</button>
+                    <select onChange={this.changeLanguage} value={this.state.value}>
+                        <option value="en">American</option>
+                        <option value="ko">한국어</option>
+                        <option value="jp">日本語</option>
+                        <option value="th">ภาษาไทย</option>
+                    </select>
                     <div className="">
-                        <List listData={this.state.commentData}/>
-                        <Input inputData={this.getCommentData} />
+                        <List listData={this.state.commentData} />
+                        {this.state.isToggle ? <Input inputData={this.getCommentData} /> : ''}
                     </div>
                 </div>
             </>

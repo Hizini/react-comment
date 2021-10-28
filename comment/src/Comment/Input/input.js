@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './input.scss';
+import i18n from "./../i18n/i18n";
 
 class Input extends Component {
 
@@ -32,13 +33,7 @@ class Input extends Component {
             alert("닉네임을 입력해주세요!")
         }
         if (this.state.value && this.state.nickname !== '') {
-            console.log(this.state.value, this.state.nickname)
             inputData(this.state.value, this.state.nickname, this.state.checked)
-            // if (this.state.checked === true) {
-            //     this.setState({
-            //         nickname: '익명'
-            //     })
-            // }
         }
     }
 
@@ -50,14 +45,16 @@ class Input extends Component {
 
 
 render() {
+    console.log(this.state.value, this.state.nickname)
     console.log(this.state.checked)
+    console.log(i18n.t('Anonymous'))
     return (
         <>
             <div className="">
-                <input onChange={this.onInputValueHandler} type='text' value={this.state.value} placeholder="댓글을 입력하세요."></input>
-                <input onChange={this.onInputNicknameHandler} type='text' value={this.state.nickname} placeholder="닉네임을 입력하세요."></input>
-                <button onClick={this.onButtonHandler}>입력</button>
-                <div>닉네임 익명 여부
+                <input onChange={this.onInputValueHandler} type='text' value={this.state.value} placeholder={i18n.t('comment')}></input>
+                <input onChange={this.onInputNicknameHandler} type='text' value={this.state.nickname} placeholder={i18n.t('nickname')}></input>
+                <button onClick={this.onButtonHandler}>{i18n.t('Input')}</button>
+                <div>{i18n.t('Anonymous')}
                     <input onChange={this.onCheckedHandler} type='checkbox' value={this.state.checked}></input>
                 </div>
             </div>
